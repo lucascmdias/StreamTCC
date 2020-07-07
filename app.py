@@ -7,10 +7,10 @@ pd.options.display.max_columns = 20
 pd.options.display.max_rows = 9999
 
 #aumento de 2% de conc ou temp - padrão
-padrao_conc_metanol = pd.read_csv('banco\dados-padroes\dados_conc_metanol_csv.csv', sep = ",")
-padrao_conc_tolueno = pd.read_csv('banco\dados-padroes\dados_conc_tolueno_csv.csv', sep = ",")
-padrao_temp_metanol = pd.read_csv('banco\\dados-padroes\\dados_temp_metanol_csv.csv', sep = ",")
-padrao_temp_tolueno = pd.read_csv('banco\\dados-padroes\\dados_temp_tolueno_csv.csv', sep = ",")
+padrao_conc_metanol = pd.read_csv('dados_conc_metanol_csv.csv', sep = ",")
+padrao_conc_tolueno = pd.read_csv('dados_conc_tolueno_csv.csv', sep = ",")
+padrao_temp_metanol = pd.read_csv('dados_temp_metanol_csv.csv', sep = ",")
+padrao_temp_tolueno = pd.read_csv('dados_temp_tolueno_csv.csv', sep = ",")
 
 #perturbacao8 = pd.read_csv('C:\\Users\\lucas\\Desktop\\dados tcc\\perturbacoes\\perturbacao8\\dados_perturbacao8_csv.csv', sep=',')
 #perturbacao9 = pd.read_csv('C:\\Users\\lucas\\Desktop\\dados tcc\\perturbacoes\\perturbacao9\\dados_perturbacao9_csv.csv', sep=',')
@@ -27,10 +27,10 @@ temp_perturbacao2 = pd.read_csv('banco\\dados-padroes-decantador\\temp_perturbac
 #perturbacao13 = pd.read_csv('C:\\Users\\lucas\\Desktop\\dados tcc\\perturbacoes\\perturbacao13\\dados_perturbacao13_csv.csv', sep=',')
 
 #padrao down 2% \/
-padrao_down_conc_metanol = pd.read_csv('banco\\dados-padroes\\dados_down_conc_padrao_metanol_csv.csv',sep=',')
-padrao_down_conc_tolueno = pd.read_csv('banco\\dados-padroes\\dados_down_conc_padrao_tolueno_csv.csv',sep=',')
-padrao_down_temp_metanol = pd.read_csv('banco\\dados-padroes\\dados_down_temp_padrao_metanol_csv.csv',sep=',')
-padrao_down_temp_tolueno = pd.read_csv('banco\\dados-padroes\\dados_down_temp_padrao_tolueno_csv.csv',sep=',')
+padrao_down_conc_metanol = pd.read_csv('dados_down_conc_padrao_metanol_csv.csv',sep=',')
+padrao_down_conc_tolueno = pd.read_csv('dados_down_conc_padrao_tolueno_csv.csv',sep=',')
+padrao_down_temp_metanol = pd.read_csv('dados_down_temp_padrao_metanol_csv.csv',sep=',')
+padrao_down_temp_tolueno = pd.read_csv('dados_down_temp_padrao_tolueno_csv.csv',sep=',')
 
 #perturbacoes em queda
 perturbacao14 = pd.read_csv('banco\\perturbacoes\\dados_perturbacao14_csv.csv', sep=',')
