@@ -424,11 +424,11 @@ if file and file2 is not None:
 
 if verificar:
 
-    perturbacao_x = pd.read_excel(file)
+    perturbacao_x = pd.read_csv(file)
     perturbacao_ = criar_listas_(perturbacao_x, lista_de_colunas2)
     df_perturbacao_ = pd.DataFrame(perturbacao_)
 
-    identificador_x = pd.read_excel(file2)
+    identificador_x = pd.read_csv(file2)
     identificador_ = criar_listas_(identificador_x, lista_de_colunas_identificador)
     df_identificador = pd.DataFrame(identificador_)
 
