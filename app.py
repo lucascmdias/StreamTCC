@@ -7,8 +7,8 @@ pd.options.display.max_columns = 20
 pd.options.display.max_rows = 9999
 
 #aumento de 2% de conc ou temp - padrão
-padrao_conc_metanol = pd.read_csv('banco\\dados-padroes\\dados_conc_metanol_csv.csv', sep = ",")
-padrao_conc_tolueno = pd.read_csv('banco\\dados-padroes\\dados_conc_tolueno_csv.csv', sep = ",")
+padrao_conc_metanol = pd.read_csv('banco\dados-padroes\dados_conc_metanol_csv.csv', sep = ",")
+padrao_conc_tolueno = pd.read_csv('banco\dados-padroes\dados_conc_tolueno_csv.csv', sep = ",")
 padrao_temp_metanol = pd.read_csv('banco\\dados-padroes\\dados_temp_metanol_csv.csv', sep = ",")
 padrao_temp_tolueno = pd.read_csv('banco\\dados-padroes\\dados_temp_tolueno_csv.csv', sep = ",")
 
