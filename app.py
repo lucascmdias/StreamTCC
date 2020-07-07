@@ -421,87 +421,87 @@ if file and file2 is not None:
     st.markdown("A coluna T_dec --> a temperatura do decantador")
     st.dataframe(df_perturbacao_)
 
+    if verificar:
 
-if verificar:
+        #perturbacao_x = pd.read_csv(file)
+        #perturbacao_ = criar_listas_(perturbacao_x, lista_de_colunas2)
+        #df_perturbacao_ = pd.DataFrame(perturbacao_)
 
-    perturbacao_x = pd.read_csv(file)
-    perturbacao_ = criar_listas_(perturbacao_x, lista_de_colunas2)
-    df_perturbacao_ = pd.DataFrame(perturbacao_)
+        #identificador_x = pd.read_csv(file2)
+        #identificador_ = criar_listas_(identificador_x, lista_de_colunas_identificador)
+        #df_identificador = pd.DataFrame(identificador_)
 
-    identificador_x = pd.read_csv(file2)
-    identificador_ = criar_listas_(identificador_x, lista_de_colunas_identificador)
-    df_identificador = pd.DataFrame(identificador_)
+        ident = verificar_aum_or_dim_perturbacao(df_perturbacao_, df_identificador)
 
-    ident = verificar_aum_or_dim_perturbacao(df_perturbacao_, df_identificador)
+        if ident == "aumentou":
+            g = verificar_tipo_perturbacao(df_perturbacao_, df_pad_conc_metanol, df_pad_conc_tolueno,
+                                           df_pad_temp_metanol, df_pad_temp_tolueno)
+            st.markdown("houve um aumento na perturbação geral")
+            # print("\n")
 
-    if ident == "aumentou":
-        g = verificar_tipo_perturbacao(df_perturbacao_, df_pad_conc_metanol, df_pad_conc_tolueno,
-                                       df_pad_temp_metanol, df_pad_temp_tolueno)
-        st.markdown("houve um aumento na perturbação geral")
-        #print("\n")
+            if g[0] == 'temperatura':
+                verficar_perturbacao_temp(perturbacao_x, df_perturbacao_)
+                temp = verficar_perturbacao_temp(perturbacao_x, df_perturbacao_)
+                if temp == "metanol":
+                    f6 = (df_perturbacao_.loc[:, "porcentagem"].sum()) / (
+                        df_pad_temp_metanol.loc[:, "porcentagem"].sum())
+                    f6 = f6 * 2
+                    f6 = round(f6, 1)
 
-        if g[0] == 'temperatura':
-            verficar_perturbacao_temp(perturbacao_x, df_perturbacao_)
-            temp = verficar_perturbacao_temp(perturbacao_x, df_perturbacao_)
-            if temp == "metanol":
-                f6 = (df_perturbacao_.loc[:, "porcentagem"].sum()) / (
-                    df_pad_temp_metanol.loc[:, "porcentagem"].sum())
-                f6 = f6 * 2
-                f6 = round(f6, 1)
+                    f7 = retornar_porcentagem_mudanca(f6)
 
-                f7 = retornar_porcentagem_mudanca(f6)
+                    st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
+                    # print("\n")
+                elif temp == "tolueno":
+                    f6 = (df_perturbacao_.loc[:, "porcentagem"].sum()) / (
+                        df_pad_temp_tolueno.loc[:, "porcentagem"].sum())
+                    f6 = f6 * 2
+                    f6 = round(f6, 1)
 
-                st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
-                # print("\n")
-            elif temp == "tolueno":
-                f6 = (df_perturbacao_.loc[:, "porcentagem"].sum()) / (
-                    df_pad_temp_tolueno.loc[:, "porcentagem"].sum())
-                f6 = f6 * 2
-                f6 = round(f6, 1)
+                    f7 = retornar_porcentagem_mudanca(f6)
+                    if f7 >= 3.7 and f7 <= 4.2:
+                        f7 = 4.0
+                    if f7 >= 1.8 and f7 <= 2.2:
+                        f7 = 2.0
+                    if f7 >= 2.8 and f7 <= 3.2:
+                        f7 = 3.0
+                    st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
+                    # print("\n")
 
-                f7 = retornar_porcentagem_mudanca(f6)
-                if f7 >= 3.7 and f7 <= 4.2:
-                    f7 = 4.0
-                if f7 >= 1.8 and f7 <= 2.2:
-                    f7 = 2.0
-                if f7 >= 2.8 and f7 <= 3.2:
-                    f7 = 3.0
-                st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
-                # print("\n")
+        if ident == "diminuiu":
+            g = verificar_tipo_perturbacao(df_perturbacao_, df_pad_down_conc_metanol, df_pad_down_conc_tolueno,
+                                           df_pad_down_temp_metanol, df_pad_down_temp_tolueno)
+            st.markdown("houve uma diminuição na perturbação geral")
 
-    if ident == "diminuiu":
-        g = verificar_tipo_perturbacao(df_perturbacao_, df_pad_down_conc_metanol, df_pad_down_conc_tolueno,
-                                       df_pad_down_temp_metanol, df_pad_down_temp_tolueno)
-        st.markdown("houve uma diminuição na perturbação geral")
+            if g[0] == 'temperatura':
+                verficar_perturbacao_temp(perturbacao_x, df_perturbacao_)
+                temp = verficar_perturbacao_temp(perturbacao_x, df_perturbacao_)
+                if temp == "metanol":
+                    f6 = (df_perturbacao_.loc[:, "porcentagem"].sum()) / (
+                        df_pad_down_temp_metanol.loc[:, "porcentagem"].sum())
+                    f6 = f6 * 2
+                    f6 = round(f6, 1)
 
-        if g[0] == 'temperatura':
-            verficar_perturbacao_temp(perturbacao_x, df_perturbacao_)
-            temp = verficar_perturbacao_temp(perturbacao_x, df_perturbacao_)
-            if temp == "metanol":
-                f6 = (df_perturbacao_.loc[:, "porcentagem"].sum()) / (
-                    df_pad_down_temp_metanol.loc[:, "porcentagem"].sum())
-                f6 = f6 * 2
-                f6 = round(f6, 1)
+                    f7 = retornar_porcentagem_mudanca(f6)
 
-                f7 = retornar_porcentagem_mudanca(f6)
+                    st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
+                    # print("\n")
+                elif temp == "tolueno":
+                    f6 = (df_perturbacao_.loc[:, "porcentagem"].sum()) / (
+                        df_pad_down_temp_tolueno.loc[:, "porcentagem"].sum())
+                    f6 = f6 * 2
+                    f6 = round(f6, 1)
 
-                st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
-                # print("\n")
-            elif temp == "tolueno":
-                f6 = (df_perturbacao_.loc[:, "porcentagem"].sum()) / (
-                    df_pad_down_temp_tolueno.loc[:, "porcentagem"].sum())
-                f6 = f6 * 2
-                f6 = round(f6, 1)
+                    f7 = retornar_porcentagem_mudanca(f6)
+                    if f7 >= 3.7 and f7 <= 4.2:
+                        f7 = 4.0
+                    if f7 >= 1.8 and f7 <= 2.2:
+                        f7 = 2.0
+                    if f7 >= 2.8 and f7 <= 3.2:
+                        f7 = 3.0
+                    st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
+                    # print("\n")
 
-                f7 = retornar_porcentagem_mudanca(f6)
-                if f7 >= 3.7 and f7 <= 4.2:
-                    f7 = 4.0
-                if f7 >= 1.8 and f7 <= 2.2:
-                    f7 = 2.0
-                if f7 >= 2.8 and f7 <= 3.2:
-                    f7 = 3.0
-                st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
-                # print("\n")
 
 
 
