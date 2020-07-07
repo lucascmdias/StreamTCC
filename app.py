@@ -15,10 +15,10 @@ padrao_temp_tolueno = pd.read_csv('dados_temp_tolueno_csv.csv', sep = ",")
 #perturbacao8 = pd.read_csv('C:\\Users\\lucas\\Desktop\\dados tcc\\perturbacoes\\perturbacao8\\dados_perturbacao8_csv.csv', sep=',')
 #perturbacao9 = pd.read_csv('C:\\Users\\lucas\\Desktop\\dados tcc\\perturbacoes\\perturbacao9\\dados_perturbacao9_csv.csv', sep=',')
 
-dados_padrao_temp_1 = pd.read_csv('banco\\dados-padroes-decantador\\dados_padrao1_csv.csv', decimal=',')
-dados_padrao_temp_2 = pd.read_csv('banco\\dados-padroes-decantador\\dados_padrao2_csv.csv', decimal=',')
-temp_perturbacao1 = pd.read_csv('banco\\dados-padroes-decantador\\temp_perturbacao1_csv.csv', decimal=',')
-temp_perturbacao2 = pd.read_csv('banco\\dados-padroes-decantador\\temp_perturbacao2_csv.csv', decimal=',')
+dados_padrao_temp_1 = pd.read_csv('dados_padrao1_csv.csv', decimal=',')
+dados_padrao_temp_2 = pd.read_csv('dados_padrao2_csv.csv', decimal=',')
+temp_perturbacao1 = pd.read_csv('temp_perturbacao1_csv.csv', decimal=',')
+temp_perturbacao2 = pd.read_csv('temp_perturbacao2_csv.csv', decimal=',')
 
 #perturbacao7 = pd.read_csv('C:\\Users\\lucas\\Desktop\\dados tcc\\perturbacoes\\perturbacao7\\dados_perturbacao7_csv.csv', sep=',')
 #perturbacao10 = pd.read_csv('C:\\Users\\lucas\\Desktop\\dados tcc\\perturbacoes\\perturbacao10\\dados_perturbacao10_csv.csv', sep=',')
@@ -33,13 +33,13 @@ padrao_down_temp_metanol = pd.read_csv('dados_down_temp_padrao_metanol_csv.csv',
 padrao_down_temp_tolueno = pd.read_csv('dados_down_temp_padrao_tolueno_csv.csv',sep=',')
 
 #perturbacoes em queda
-perturbacao14 = pd.read_csv('banco\\perturbacoes\\dados_perturbacao14_csv.csv', sep=',')
-perturbacao15 = pd.read_csv('banco\\perturbacoes\\dados_perturbacao15_csv.csv', sep=',')
+perturbacao14 = pd.read_csv('dados_perturbacao14_csv.csv', sep=',')
+perturbacao15 = pd.read_csv('dados_perturbacao15_csv.csv', sep=',')
 #testes
-teste2 = pd.read_csv('banco\\perturbacoes\\teste2_csv.csv', sep=',')
+teste2 = pd.read_csv('teste2_csv.csv', sep=',')
 #AGORAVAI
-perturbacao16 = pd.read_csv('banco\\perturbacoes\\dados_perturbacao16_csv.csv', sep=',')
-identificador16 = pd.read_csv('banco\\perturbacoes\\identificador16_csv.csv', sep=',')
+perturbacao16 = pd.read_csv('dados_perturbacao16_csv.csv', sep=',')
+identificador16 = pd.read_csv('identificador16_csv.csv', sep=',')
 
 
 
