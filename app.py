@@ -362,6 +362,8 @@ st.title('Lógica Fuzzy no Processo da Produção de Estireno')
 #st.image(image = 'fuzzy.png',format="PNG")
 st.image(image = 'gif1.gif',output_format="GIF")
 
+st.set_option('deprecation.showfileUploaderEncoding', False)
+
 #buttons
 file = st.sidebar.file_uploader('escolha a perturbacao', type='xlsx')
 file2 = st.sidebar.file_uploader('escolha o identificador', type='xlsx')
