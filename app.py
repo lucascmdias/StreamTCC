@@ -421,7 +421,11 @@ if file and file2 is not None:
     st.markdown("As colunas vapFrac --> frações vapores do reator")
     st.markdown("As colunas P_bar e T_c --> as pressões e temperaturas do reator")
     st.markdown("A coluna T_dec --> a temperatura do decantador")
-    st.dataframe(df_perturbacao_)
+    df_perturbacao_colunas = df_perturbacao_
+    df_perturbacao_colunas['Tipo'] = ['LiqFrac_H','LiqFrac_MET','LiqFrac_STY','LiqFrac_TOL','LiqFrac_MET',
+                                      'vapFrac_H', 'vapFrac_MET', 'vapFrac_STY', 'vapFrac_TOL', 'vapFrac_MET',
+                                      'P_bar','T_c', 'T_dec']
+    st.dataframe(df_perturbacao_colunas)
 
     if verificar:
 
