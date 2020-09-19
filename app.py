@@ -176,6 +176,7 @@ def verificar_tipo_perturbacao(dataframe_perturbacao,dataframe_padrao1,dataframe
         f1 = (dataframe_perturbacao.loc[:,"porcentagem"].sum())/(dataframe_padrao1.loc[:,"porcentagem"].sum())
         f1 = f1*2
         f1 = round(f1,0)
+        verif_porc.append(f1)
         st.markdown("a porcentagem de mudanca foi de {} %".format(f1))
         st.markdown(verif_porc)
         #print("\n")
@@ -194,6 +195,7 @@ def verificar_tipo_perturbacao(dataframe_perturbacao,dataframe_padrao1,dataframe
         f2 = (dataframe_perturbacao.loc[:, "porcentagem"].sum()) / (dataframe_padrao2.loc[:, "porcentagem"].sum())
         f2 = f2 * 2
         f2 = round(f2, 0)
+        verif_porc.append(f2)
         st.markdown("a porcentagem de mudanca foi de {} %".format(f2))
         st.markdown(verif_porc)
         #print("\n")
@@ -388,11 +390,11 @@ if file and file2 is not None:
 
     st.subheader("Descrição das colunas abaixo")
     st.markdown('')
-    st.markdown("A coluna Time --> é o tempo em horas")
-    st.markdown("As colunas LiqFrac -->  frações líquidas do reator")
-    st.markdown("As colunas vapFrac --> frações vapores do reator")
-    st.markdown("As colunas P_bar e T_c --> as pressões e temperaturas do reator")
-    st.markdown("A coluna T_dec --> a temperatura do decantador")
+    #st.markdown("A coluna Time --> é o tempo em horas")
+    #st.markdown("As colunas LiqFrac -->  frações líquidas do reator")
+    #st.markdown("As colunas vapFrac --> frações vapores do reator")
+    #st.markdown("As colunas P_bar e T_c --> as pressões e temperaturas do reator")
+    #st.markdown("A coluna T_dec --> a temperatura do decantador")
 
     slider1 = st.slider('TAMANHO PARA VISUALIZAÇÃO DAS LINHAS', 1,perturbacao_x.shape[0])
     st.dataframe(perturbacao_x.head(slider1))
@@ -402,11 +404,11 @@ if file and file2 is not None:
     st.markdown('')
 
     st.subheader('Gráficos dos dados da Fração Líquida')
-    st.line_chart(perturbacao_x[['LiqFrac_H','LiqFrac_MET','LiqFrac_STY','LiqFrac_TOL','LiqFrac_MET']])
+    st.line_chart(perturbacao_x[['LiqFrac_H','LiqFrac_MET','LiqFrac_STY','LiqFrac_TOL','LiqFrac_WAT']])
     st.markdown('')
 
     st.subheader('Gráficos dos dados da Fração Vapor')
-    st.line_chart(perturbacao_x[['vapFrac_H', 'vapFrac_MET', 'vapFrac_STY', 'vapFrac_TOL', 'vapFrac_MET']])
+    st.line_chart(perturbacao_x[['vapFrac_H', 'vapFrac_MET', 'vapFrac_STY', 'vapFrac_TOL', 'vapFrac_WAT']])
     st.markdown('')
 
     st.subheader('Gráficos dos dados da Temperatura e Pressão')
@@ -416,15 +418,22 @@ if file and file2 is not None:
     st.subheader('Tabela dos uniques')
     st.subheader("Descrição das colunas abaixo")
     st.markdown('')
-    st.markdown("A coluna Numeros --> Números diferentes das colunas")
-    st.markdown("As colunas LiqFrac -->  frações líquidas do reator")
-    st.markdown("As colunas vapFrac --> frações vapores do reator")
-    st.markdown("As colunas P_bar e T_c --> as pressões e temperaturas do reator")
-    st.markdown("A coluna T_dec --> a temperatura do decantador")
+    #st.markdown("A coluna Numeros --> Números diferentes das colunas")
+    #st.markdown("As colunas LiqFrac -->  frações líquidas do reator")
+    #st.markdown("As colunas vapFrac --> frações vapores do reator")
+    #st.markdown("As colunas P_bar e T_c --> as pressões e temperaturas do reator")
+    #st.markdown("A coluna T_dec --> a temperatura do decantador")
     df_perturbacao_colunas = df_perturbacao_
-    df_perturbacao_colunas['Tipo'] = ['LiqFrac_H','LiqFrac_MET','LiqFrac_STY','LiqFrac_TOL','LiqFrac_MET',
-                                      'vapFrac_H', 'vapFrac_MET', 'vapFrac_STY', 'vapFrac_TOL', 'vapFrac_MET',
-                                      'P_bar','T_c', 'T_dec']
+    df_perturbacao_colunas['Tipo'] = ['LiqFrac_H','LiqFrac_MET','LiqFrac_STY','LiqFrac_TOL','LiqFrac_WAT',
+                                      'vapFrac_H', 'vapFrac_MET', 'vapFrac_STY', 'vapFrac_TOL', 'vapFrac_WAT',
+                                      'P_Reator_bar','T_Reator_C']
+
+    data = {
+        'Parâmetro de Perturbação' : None ,
+        'Previsão' : None,
+        'Porcentagem de Mudança' : None
+
+    }
     st.dataframe(df_perturbacao_colunas)
 
     if verificar:
@@ -439,10 +448,18 @@ if file and file2 is not None:
 
         ident = verificar_aum_or_dim_perturbacao(df_perturbacao_, df_identificador)
 
+
         if ident == "aumentou":
             g = verificar_tipo_perturbacao(df_perturbacao_, df_pad_conc_metanol, df_pad_conc_tolueno,
                                            df_pad_temp_metanol, df_pad_temp_tolueno)
             st.markdown("houve um aumento na perturbação geral")
+            data['Previsão'] = 'Aumento'
+            data['Parâmetro de Perturbação'] = g[0]
+            if g[0] == 'concentracao':
+                data['Porcentagem de Mudança'] = g[1]
+
+
+
             # print("\n")
 
             if g[0] == 'temperatura':
@@ -456,7 +473,10 @@ if file and file2 is not None:
 
                     f7 = retornar_porcentagem_mudanca(f6)
 
+                    data['Porcentagem de Mudança'] = f7
+
                     st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
+                    final_ident['Porcentagem De Mudança'] = f7
                     # print("\n")
                 elif temp == "tolueno":
                     f6 = (df_perturbacao_.loc[:, "porcentagem"].sum()) / (
@@ -467,10 +487,13 @@ if file and file2 is not None:
                     f7 = retornar_porcentagem_mudanca(f6)
                     if f7 >= 3.7 and f7 <= 4.2:
                         f7 = 4.0
+                        data['Porcentagem de Mudança'] = f7
                     if f7 >= 1.8 and f7 <= 2.2:
                         f7 = 2.0
+                        data['Porcentagem de Mudança'] = f7
                     if f7 >= 2.8 and f7 <= 3.2:
                         f7 = 3.0
+                        data['Porcentagem de Mudança'] = f7
                     st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
                     # print("\n")
 
@@ -478,6 +501,12 @@ if file and file2 is not None:
             g = verificar_tipo_perturbacao(df_perturbacao_, df_pad_down_conc_metanol, df_pad_down_conc_tolueno,
                                            df_pad_down_temp_metanol, df_pad_down_temp_tolueno)
             st.markdown("houve uma diminuição na perturbação geral")
+            data['Previsão'] = 'Diminuição'
+            data['Parâmetro de Perturbação'] = g[0]
+            if g[0] == 'concentracao':
+                data['Porcentagem de Mudança'] = g[1]
+
+
 
             if g[0] == 'temperatura':
                 verficar_perturbacao_temp(perturbacao_x, df_perturbacao_)
@@ -490,6 +519,8 @@ if file and file2 is not None:
 
                     f7 = retornar_porcentagem_mudanca(f6)
 
+                    data['Porcentagem de Mudança'] = f7
+
                     st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
                     # print("\n")
                 elif temp == "tolueno":
@@ -501,12 +532,20 @@ if file and file2 is not None:
                     f7 = retornar_porcentagem_mudanca(f6)
                     if f7 >= 3.7 and f7 <= 4.2:
                         f7 = 4.0
+                        data['Porcentagem de Mudança'] = f7
                     if f7 >= 1.8 and f7 <= 2.2:
                         f7 = 2.0
+                        data['Porcentagem de Mudança'] = f7
                     if f7 >= 2.8 and f7 <= 3.2:
                         f7 = 3.0
+                        data['Porcentagem de Mudança'] = f7
+
                     st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
                     # print("\n")
+
+        final_ident = pd.DataFrame(data = data,index=[0], columns=['Parâmetro de Perturbação',
+                                                                       'Previsão','Porcentagem de Mudança'])
+        st.dataframe(final_ident)
 
 
 
