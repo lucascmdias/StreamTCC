@@ -360,7 +360,7 @@ df_id16 = pd.DataFrame(i_d16)
 #head and images
 st.title('Lógica Fuzzy no Processo da Produção de Estireno')
 #st.image(image = 'fuzzy.png',format="PNG")
-st.image(image = 'gif1.gif',format="GIF")
+st.image(image = 'gif1.gif',output_format="GIF")
 
 #buttons
 file = st.sidebar.file_uploader('escolha a perturbacao', type='xlsx')
