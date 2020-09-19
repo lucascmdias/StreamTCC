@@ -363,18 +363,18 @@ st.title('Lógica Fuzzy no Processo da Produção de Estireno')
 st.image(image = 'gif1.gif',format="GIF")
 
 #buttons
-file = st.sidebar.file_uploader('escolha a perturbacao', type='csv')
-file2 = st.sidebar.file_uploader('escolha o identificador', type='csv')
+file = st.sidebar.file_uploader('escolha a perturbacao', type='xlsx')
+file2 = st.sidebar.file_uploader('escolha o identificador', type='xlsx')
 
 #analise_robusta = st.sidebar.button('analise')
 verificar = st.sidebar.button('Verificar')
 
 if file and file2 is not None:
-    perturbacao_x = pd.read_csv(file)
+    perturbacao_x = pd.read_excel(file)
     perturbacao_ = criar_listas_(perturbacao_x, lista_de_colunas2)
     df_perturbacao_ = pd.DataFrame(perturbacao_)
 
-    identificador_x = pd.read_csv(file2)
+    identificador_x = pd.read_excel(file2)
     identificador_ = criar_listas_(identificador_x, lista_de_colunas_identificador)
     df_identificador = pd.DataFrame(identificador_)
 
