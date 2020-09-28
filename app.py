@@ -458,7 +458,7 @@ if file and file2 is not None:
         if ident == "aumentou":
             g = verificar_tipo_perturbacao(df_perturbacao_, df_pad_conc_metanol, df_pad_conc_tolueno,
                                            df_pad_temp_metanol, df_pad_temp_tolueno)
-            st.markdown("houve um aumento na perturbação geral")
+            #st.markdown("houve um aumento na perturbação geral")
             data['Previsão'] = 'Aumento'
             data['Parâmetro de Perturbação'] = g[0]
             if g[0] == 'concentracao':
@@ -510,7 +510,7 @@ if file and file2 is not None:
         if ident == "diminuiu":
             g = verificar_tipo_perturbacao(df_perturbacao_, df_pad_down_conc_metanol, df_pad_down_conc_tolueno,
                                            df_pad_down_temp_metanol, df_pad_down_temp_tolueno)
-            st.markdown("houve uma diminuição na perturbação geral")
+            #st.markdown("houve uma diminuição na perturbação geral")
             data['Previsão'] = 'Diminuição'
             data['Parâmetro de Perturbação'] = g[0]
             if g[0] == 'concentracao':
