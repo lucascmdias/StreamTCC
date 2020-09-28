@@ -178,7 +178,7 @@ def verificar_tipo_perturbacao(dataframe_perturbacao,dataframe_padrao1,dataframe
             verificacao1.append(0)
 
     if sum(verificacao1) == dataframe_perturbacao.shape[0]:
-        st.markdown("o tipo de perturbacao foi padrao1 - metanol")
+        #st.markdown("o tipo de perturbacao foi padrao1 - metanol")
 
         data['Reagente'] = "metanol"
 
@@ -187,8 +187,8 @@ def verificar_tipo_perturbacao(dataframe_perturbacao,dataframe_padrao1,dataframe
         f1 = f1*2
         f1 = round(f1,0)
         verif_porc.append(f1)
-        st.markdown("a porcentagem de mudanca foi de {} %".format(f1))
-        st.markdown(verif_porc)
+        #st.markdown("a porcentagem de mudanca foi de {} %".format(f1))
+        #st.markdown(verif_porc)
         #print("\n")
 
 
@@ -200,15 +200,15 @@ def verificar_tipo_perturbacao(dataframe_perturbacao,dataframe_padrao1,dataframe
             verificacao2.append(0)
 
     if sum(verificacao2) == dataframe_perturbacao.shape[0]:
-        st.markdown("o tipo de perturbacao foi padrao2 - tolueno")
+        #st.markdown("o tipo de perturbacao foi padrao2 - tolueno")
         data['Reagente'] = "tolueno"
         verif_porc.append('concentracao')
         f2 = (dataframe_perturbacao.loc[:, "porcentagem"].sum()) / (dataframe_padrao2.loc[:, "porcentagem"].sum())
         f2 = f2 * 2
         f2 = round(f2, 0)
         verif_porc.append(f2)
-        st.markdown("a porcentagem de mudanca foi de {} %".format(f2))
-        st.markdown(verif_porc)
+        #st.markdown("a porcentagem de mudanca foi de {} %".format(f2))
+        #st.markdown(verif_porc)
         #print("\n")
 
     for i in range(0,dataframe_padrao3.shape[0]):
@@ -220,7 +220,7 @@ def verificar_tipo_perturbacao(dataframe_perturbacao,dataframe_padrao1,dataframe
     if sum(verificacao3) == dataframe_perturbacao.shape[0]:
         #print("o tipo de perturbacao foi padrao3\n")
         verif_porc.append('temperatura')
-        st.markdown(verif_porc)
+        #st.markdown(verif_porc)
 
     for i in range(0,dataframe_padrao4.shape[0]):
         if dataframe_perturbacao.loc[i,"string"] == dataframe_padrao4.loc[i,"string"]:
@@ -231,22 +231,22 @@ def verificar_tipo_perturbacao(dataframe_perturbacao,dataframe_padrao1,dataframe
     if sum(verificacao4) == dataframe_perturbacao.shape[0]:
         #print("o tipo de perturbacao foi padrao 4\n")
         verif_porc.append('temperatura')
-        st.markdown(verif_porc)
+        #st.markdown(verif_porc)
 
 
     return verif_porc
 
 def verficar_perturbacao_temp(dataframe_perturbacao,dataframe_perturbacao_df):
     if dataframe_perturbacao.loc[dataframe_perturbacao.shape[0] -1,'T_dec'] > dataframe_perturbacao.loc[0,'T_dec']:
-        st.markdown("perturbacão na temperatura do tolueno")
+        #st.markdown("perturbacão na temperatura do tolueno")
         perturbacao = "tolueno"
 
     if dataframe_perturbacao.loc[dataframe_perturbacao.shape[0] -1,'T_dec'] < dataframe_perturbacao.loc[0,'T_dec']:
         if dataframe_perturbacao_df.loc[11,'porcentagem'] > 2.5:
-            st.markdown("perturbacão na temperatura do tolueno")
+            #st.markdown("perturbacão na temperatura do tolueno")
             perturbacao = "tolueno"
         else:
-            st.markdown("perturbacão na temperatura do metanol")
+            #st.markdown("perturbacão na temperatura do metanol")
             perturbacao = "metanol"
 
     return perturbacao
@@ -556,6 +556,8 @@ if file and file2 is not None:
 
                     st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
                     # print("\n")
+
+        st.header("Identificação Da Perturbação do Processo de Estireno")
 
         final_ident = pd.DataFrame(data = data,index=[0], columns=['Reagente','Parâmetro de Perturbação',
                                                                        'Previsão','Porcentagem de Mudança'])
