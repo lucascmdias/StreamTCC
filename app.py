@@ -372,6 +372,7 @@ df_id16 = pd.DataFrame(i_d16)
 
 #head and images
 st.title('Lógica Fuzzy no Processo da Produção de Estireno')
+st.subheader("Developed by: Lucas Cerqueira")
 #st.image(image = 'fuzzy.png',format="PNG")
 st.image(image = 'gif1.gif',output_format="GIF")
 
