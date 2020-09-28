@@ -156,6 +156,13 @@ def mudanca_valor_aum_dim(lista_numeros):
 
     return mudanca
 
+data = {
+        'Reagente': None,
+        'Parâmetro de Perturbação' : None ,
+        'Previsão' : None,
+        'Porcentagem de Mudança' : None
+}
+
 def verificar_tipo_perturbacao(dataframe_perturbacao,dataframe_padrao1,dataframe_padrao2,dataframe_padrao3,dataframe_padrao4):
     verificacao1 = []
     verificacao2 = []
@@ -172,6 +179,9 @@ def verificar_tipo_perturbacao(dataframe_perturbacao,dataframe_padrao1,dataframe
 
     if sum(verificacao1) == dataframe_perturbacao.shape[0]:
         st.markdown("o tipo de perturbacao foi padrao1 - metanol")
+
+        data['Reagente'] = "metanol"
+
         verif_porc.append('concentracao')
         f1 = (dataframe_perturbacao.loc[:,"porcentagem"].sum())/(dataframe_padrao1.loc[:,"porcentagem"].sum())
         f1 = f1*2
@@ -191,6 +201,7 @@ def verificar_tipo_perturbacao(dataframe_perturbacao,dataframe_padrao1,dataframe
 
     if sum(verificacao2) == dataframe_perturbacao.shape[0]:
         st.markdown("o tipo de perturbacao foi padrao2 - tolueno")
+        data['Reagente'] = "tolueno"
         verif_porc.append('concentracao')
         f2 = (dataframe_perturbacao.loc[:, "porcentagem"].sum()) / (dataframe_padrao2.loc[:, "porcentagem"].sum())
         f2 = f2 * 2
@@ -428,12 +439,7 @@ if file and file2 is not None:
                                       'vapFrac_H', 'vapFrac_MET', 'vapFrac_STY', 'vapFrac_TOL', 'vapFrac_WAT',
                                       'P_Reator_bar','T_Reator_C']
 
-    data = {
-        'Parâmetro de Perturbação' : None ,
-        'Previsão' : None,
-        'Porcentagem de Mudança' : None
 
-    }
     st.dataframe(df_perturbacao_colunas)
 
     if verificar:
@@ -471,18 +477,22 @@ if file and file2 is not None:
                     f6 = f6 * 2
                     f6 = round(f6, 1)
 
+                    data['Reagente'] = temp
+
                     f7 = retornar_porcentagem_mudanca(f6)
 
                     data['Porcentagem de Mudança'] = f7
 
                     st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
-                    final_ident['Porcentagem De Mudança'] = f7
+                    data['Porcentagem De Mudança'] = f7
                     # print("\n")
                 elif temp == "tolueno":
                     f6 = (df_perturbacao_.loc[:, "porcentagem"].sum()) / (
                         df_pad_temp_tolueno.loc[:, "porcentagem"].sum())
                     f6 = f6 * 2
                     f6 = round(f6, 1)
+
+                    data['Reagente'] = temp
 
                     f7 = retornar_porcentagem_mudanca(f6)
                     if f7 >= 3.7 and f7 <= 4.2:
@@ -517,6 +527,8 @@ if file and file2 is not None:
                     f6 = f6 * 2
                     f6 = round(f6, 1)
 
+                    data['Reagente'] = temp
+
                     f7 = retornar_porcentagem_mudanca(f6)
 
                     data['Porcentagem de Mudança'] = f7
@@ -528,6 +540,8 @@ if file and file2 is not None:
                         df_pad_down_temp_tolueno.loc[:, "porcentagem"].sum())
                     f6 = f6 * 2
                     f6 = round(f6, 1)
+
+                    data['Reagente'] = temp
 
                     f7 = retornar_porcentagem_mudanca(f6)
                     if f7 >= 3.7 and f7 <= 4.2:
@@ -543,7 +557,7 @@ if file and file2 is not None:
                     st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
                     # print("\n")
 
-        final_ident = pd.DataFrame(data = data,index=[0], columns=['Parâmetro de Perturbação',
+        final_ident = pd.DataFrame(data = data,index=[0], columns=['Reagente','Parâmetro de Perturbação',
                                                                        'Previsão','Porcentagem de Mudança'])
         st.dataframe(final_ident)
 
