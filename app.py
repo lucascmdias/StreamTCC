@@ -484,7 +484,7 @@ if file and file2 is not None:
 
                     data['Porcentagem de Mudança'] = f7
 
-                    st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
+                    #st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
                     data['Porcentagem De Mudança'] = f7
                     # print("\n")
                 elif temp == "tolueno":
@@ -505,7 +505,7 @@ if file and file2 is not None:
                     if f7 >= 2.8 and f7 <= 3.2:
                         f7 = 3.0
                         data['Porcentagem de Mudança'] = f7
-                    st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
+                    #st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
                     # print("\n")
 
         if ident == "diminuiu":
@@ -534,7 +534,7 @@ if file and file2 is not None:
 
                     data['Porcentagem de Mudança'] = f7
 
-                    st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
+                    #st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
                     # print("\n")
                 elif temp == "tolueno":
                     f6 = (df_perturbacao_.loc[:, "porcentagem"].sum()) / (
@@ -555,7 +555,7 @@ if file and file2 is not None:
                         f7 = 3.0
                         data['Porcentagem de Mudança'] = f7
 
-                    st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
+                    #st.markdown("a porcentagem de mudanca foi de {} %".format(f7))
                     # print("\n")
 
         st.header("Identificação Da Perturbação do Processo de Estireno")
